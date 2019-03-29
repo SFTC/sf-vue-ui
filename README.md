@@ -1,5 +1,5 @@
 <p>
-  <h1 style="align: center">SF-UI</h1>
+  <h1 style="text-align: center"><big>SF-UI</big></h1>
 </p>
 
 # :memo: sf-vue-ui 介绍
