@@ -6,8 +6,8 @@
 
 ## 1.0.0
 `2019-03.29`
-- [] 添加对 sass 的支持
-- [] 添加 eslint、prettier 代码规范
-- [] 添加 element-ui 组件
-- [] 完善 example 中的组件展示界面
-- [] 添加测试用例
+- [ ] 添加对 sass 的支持
+- [ ] 添加 eslint、prettier 代码规范
+- [ ] 添加 element-ui 组件
+- [ ] 完善 example 中的组件展示界面
+- [ ] 添加测试用例
