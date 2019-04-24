@@ -1,8 +1,8 @@
-import Demo from './demo';
+import Demo from "./demo";
+import MultiSelect from "./multi-select";
+import MultiOption from "./multi-option";
 // 组件列表
-const components = [
-  Demo,
-];
+const components = [Demo, MultiSelect, MultiOption];
 
 // 如果使用 use 注册插件，则所有的组件都将被注册
 const install = function(Vue) {
@@ -13,7 +13,7 @@ const install = function(Vue) {
 };
 
 // 判断是否直接引入文件,实现 examples 中任意一面直接使用
-if (typeof window !== 'undefined' && window.Vue) {
+if (typeof window !== "undefined" && window.Vue) {
   install(Window.Vue);
 }
 
@@ -21,6 +21,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default {
   install,
   Demo,
+  MultiOption,
+  MultiSelect
 };
-
-
