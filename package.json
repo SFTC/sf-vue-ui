@@ -1,10 +1,11 @@
 {
   "name": "tc-vue-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
+  "module": "src/index.js",
   "scripts": {
     "start": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "node build/build.js",
     "lint": "vue-cli-service lint",
     "build:multiselect": "vue-cli-service build --target lib --name multi-select --dest lib/multi-select packages/multi-select/src/main.vue",
     "build:multioption": "vue-cli-service build --target lib --name multi-option --dest lib/multi-option packages/multi-option/src/main.vue",

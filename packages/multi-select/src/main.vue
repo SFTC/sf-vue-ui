@@ -30,7 +30,10 @@
                 >
           </div>
           <ul class="el-select-dropdown__list">
-            <li class="el-select-dropdown__item all" @click="selectAll" :class="isAll ? 'is-selected' : ''" v-show="optionsLength > 0">全选</li>
+            <li class="el-select-dropdown__item all" @click="selectAll" :class="isAll ? 'multi-select__is-selected' : ''" v-show="optionsLength > 0">
+              <span>全选</span>
+              <i :class="['el-icon-check', { 'multi-select__selected-icon': isAll, 'multi-select__hidden': !isAll }]"></i>
+            </li>
             <slot></slot>
           </ul>
           <p class="el-select-dropdown__empty" v-show="isEmpty || optionsLength === 0">无匹配数据</p>

@@ -1,9 +1,10 @@
 <template>
   <li
       class="el-select-dropdown__item"
-      :class="{ 'is-selected': selected, 'hidden': hide }"
+      :class="{ 'multi-select__is-selected': selected, 'multi-select__hidden': hide }"
       @click="handleClick($event)">
       <span>{{ label }}</span>
+      <i :class="['el-icon-check', { 'multi-select__selected-icon': selected, 'multi-select__hidden': !selected }]"></i>
   </li>
 </template>
 
@@ -54,22 +55,21 @@ export default {
 </script>
 
 <style>
-.is-selected {
+.multi-select__is-selected {
   color: #FF4949;
   font-weight: 700;
   background: #f5f7fa;
 }
-.is-selected:after {
+.multi-select__selected-icon {
   position: absolute;
   right: 20px;
-  font-family: element-icons;
-  content: "\e6da";
   font-size: 12px;
   font-weight: 700;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  top: 11px;
 }
-.hidden {
+.multi-select__hidden {
   display: none !important;
   visibility: hidden !important;
 }
