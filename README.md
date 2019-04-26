@@ -1,15 +1,15 @@
-# :memo: tc-ui
+# :memo: tc-vue-ui
 
 ## 介绍
 
-tc-ui 是基于 Element-UI 库进行二次封装的组件库。基于现在部门的业务特点，将多个基础的UI组件进行组合，封装
+tc-vue-ui 是基于 Element-UI 库进行二次封装的组件库。基于现在部门的业务特点，将多个基础的UI组件进行组合，封装
 内部的操作逻辑，通过配置一些对外参数接口实现页面级组件的抽离和复用。极大的提高开发效率的同时，也便于统一整体的页面
 风格，减少常用的一些逻辑错误。
 
 ## :boom: 使用
 
 ```shell
-npm install tc-ui --save
+npm install tc-vue-ui --save
 ```
 
 ## :gear: 更新日志

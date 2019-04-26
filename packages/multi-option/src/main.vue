@@ -63,7 +63,7 @@ export default {
   position: absolute;
   right: 20px;
   font-family: element-icons;
-  content: "\E611";
+  content: "\e6da";
   font-size: 12px;
   font-weight: 700;
   -webkit-font-smoothing: antialiased;

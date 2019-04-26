@@ -1,5 +1,5 @@
 {
-  "name": "tc-ui",
+  "name": "tc-vue-ui",
   "version": "0.1.0",
   "private": false,
   "scripts": {
@@ -8,22 +8,21 @@
     "lint": "vue-cli-service lint",
     "build:multiselect": "vue-cli-service build --target lib --name multi-select --dest lib/multi-select packages/multi-select/src/main.vue",
     "build:multioption": "vue-cli-service build --target lib --name multi-option --dest lib/multi-option packages/multi-option/src/main.vue",
-    "lib": "vue-cli-service build --target lib --name tc-ui --dest lib packages/index.js"
+    "lib": "vue-cli-service build --target lib --name tc-vue-ui --dest lib packages/index.js"
   },
-  "dependencies": {
-    "echarts": "^4.2.1",
-    "element-ui": "^2.7.2",
-    "vue": "^2.6.6"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-plugin-eslint": "^3.5.0",
     "@vue/cli-service": "^3.5.0",
     "babel-eslint": "^10.0.1",
+    "echarts": "^4.2.1",
+    "element-ui": "^2.8.2",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
+    "vue": "^2.6.10",
     "vue-template-compiler": "^2.5.21"
   },
   "eslintConfig": {
