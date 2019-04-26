@@ -1,12 +1,14 @@
 {
-  "name": "sf-vue-ui",
+  "name": "tc-ui",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lib": "vue-cli-service build --target lib --name sf-vue-ui --dest lib packages/index.js"
+    "build:multiselect": "vue-cli-service build --target lib --name multi-select --dest lib/multi-select packages/multi-select/src/main.vue",
+    "build:multioption": "vue-cli-service build --target lib --name multi-option --dest lib/multi-option packages/multi-option/src/main.vue",
+    "lib": "vue-cli-service build --target lib --name tc-ui --dest lib packages/index.js"
   },
   "dependencies": {
     "echarts": "^4.2.1",

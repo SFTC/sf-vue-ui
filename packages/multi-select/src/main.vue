@@ -28,10 +28,10 @@
                 @input="handleSearch"
                 :value="searchVal"
                 >
-          </div>       
+          </div>
           <ul class="el-select-dropdown__list">
             <li class="el-select-dropdown__item all" @click="selectAll" :class="isAll ? 'is-selected' : ''" v-show="optionsLength > 0">全选</li>
-            <slot></slot>  
+            <slot></slot>
           </ul>
           <p class="el-select-dropdown__empty" v-show="isEmpty || optionsLength === 0">无匹配数据</p>
         </div>

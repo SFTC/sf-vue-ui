@@ -1,9 +1,13 @@
 # 忽略目录
+build/
 examples/
-packages/
+node_modules/
 public/
 
 # 忽略指定文件
+.editorconfig
 vue.config.js
 babel.config.js
+package-lock.json
+yarn.lock
 *.map
