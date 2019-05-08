@@ -1,8 +1,9 @@
 import Demo from "./demo";
 import MultiSelect from "./multi-select";
 import MultiOption from "./multi-option";
+import FormTable from "./form-table";
 // 组件列表
-const components = [Demo, MultiSelect, MultiOption];
+const components = [Demo, MultiSelect, MultiOption, FormTable];
 
 // 如果使用 use 注册插件，则所有的组件都将被注册
 const install = function(Vue) {

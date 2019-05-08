@@ -1,5 +1,9 @@
 import Vue from 'vue';
 import App from './App.vue';
+
+import element from 'element-ui'
+
+Vue.use(element)
 import 'element-ui/lib/theme-chalk/index.css';
 // import '../lib/multi-select/multi-select.css';
 // import '../lib/multi-option/multi-option.css';
@@ -7,6 +11,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 // 导入组件库
 import multiSelect from '../packages/multi-select/index';
 import multiOption from '../packages/multi-option/index';
+import formTable from '../packages/form-table/index';
 // import multiSelect from '../lib/multi-select/multi-select.umd.min.js';
 // import multiOption from '../lib/multi-option/multi-option.umd.min.js';
 // const multiSelect = require('../lib/sftc-multiselect.umd.min').default;
@@ -14,6 +19,7 @@ import multiOption from '../packages/multi-option/index';
 // Vue.use(multiSelect);
 Vue.component(multiSelect.name, multiSelect);
 Vue.component(multiOption.name, multiOption);
+Vue.component(formTable.name, formTable);
 
 Vue.config.productionTip = false;
 

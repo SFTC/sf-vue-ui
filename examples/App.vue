@@ -1,123 +1,113 @@
 <template>
   <div id="app">
-    <MultiSelect placeholder="请选择内容" v-model="value">
-      <MultiOption
-        v-for="item in options"
-        :key="item.value"
-        :value="item.value"
-        :label="item.label"
-      ></MultiOption>
-    </MultiSelect>
-    <div wrapper>
-        <h4 class="main-title">活动效果</h4>
-        <list-page
-            ref="listpage"
-            :queryFilter="queryFilter"
-            @setParams="setParams"
-            @cbFormat="callbackDataFormat"
-            :queryFunc="queryFunc"
-            :filter="filter"
-            :table="table">
-        </list-page>
-    </div>
+    <FormTable
+      ref="form-table"
+      :queryFilter="queryFilter"
+      :domFilter="domFilter"
+      :queryFunc="queryFunc"
+      :tableLabel="tableLabel"
+      :tableData="tableData"
+      :tableOperation="tableOperation"
+      @setQueryFilter="setQueryFilter"
+      @callbackDataFormat="callbackDataFormat">
+    </FormTable>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'app',
   components: {
     // HelloWorld
   },
   data() {
-    const activeDate = [
-            this.moment(this.$route.params.begin_time * 1000),
-            this.moment(this.$route.params.end_time * 1000),
-        ]
-        return {
-          value: [],
-          options: [{
-              value: '选项1',
-              label: '黄金糕'
-            }, {
-              value: '选项2',
-              label: '双皮奶'
-            }, {
-              value: '选项3',
-              label: '蚵仔煎'
-            }, {
-              value: '选项4',
-              label: '龙须面'
-            }, {
-              value: '选项5',
-              label: '北京烤鸭'
-            }],
-            
-            queryFilter: {},
-            queryFunc: cashbackEffectList,
-            filter: [
-                {
-                    label: '日期',
-                    type: 'date',
-                    name: 'activeDate',
-                    limit: 31,
-                    default: activeDate
-                },
-                {
-                    label: '店铺ID',
-                    type: 'input',
-                    name: 'shopId',
-                },
-                {
-                    label: '店铺名称',
-                    type: 'input',
-                    name: 'shopName',
-                },
-            ],
-            table: {
-                data: [],
-                content: [
-                    {
-                        label: '日期',
-                        prop: 'create_time_show',
-                        minWidth: 180,
-                    },
-                    {
-                        label: '活动名称',
-                        prop: 'activity_name',
-                        minWidth: 180,
-                    },
-                    {
-                        label: '店铺ID',
-                        prop: 'shop_id',
-                        minWidth: 180,
-                    },
-                    {
-                        label: '店铺名称',
-                        prop: 'shop_name',
-                        minWidth: 180,
-                    },
-                    {
-                        label: '充值金额(元)',
-                        prop: 'real_amount_show',
-                        minWidth: 180,
-                    },
-                    {
-                        label: '赠送金额(元)',
-                        prop: 'gift_amount_show',
-                        minWidth: 180,
-                    },
-                    {
-                        label: '首次充值',
-                        prop: 'user_charge_type_name',
-                        minWidth: 180,
-                    },
-                ],
+    return {
+      queryFilter: {},      // 列表接口参数
+      domFilter: [
+        {
+          label: '输入',
+          type: 'input',
+          name: 'a',        
+        }, {
+          label: '日期',
+          type: 'date',
+          name: 'b',
+          limit: 10,        // 期末范围控制
+          default: []       // 默认时间
+        }, {                // 下拉框sugMap参数Array转换为 [{key: 'key', value: 'value'}]  Object转换为 {key: value}
+          label: '下拉',
+          type: 'select',
+          sugMap: [
+            {
+              key: 1,
+              value: 'aa'
             }
+          ],
+        }, {
+          label: '下拉',
+          type: 'select',
+          sugMap: {
+            'key': 'value'
+          },
+        }, {
+          label: 'button',
+          type: 'button',
+          func: () => {}
         }
+      ],
+      queryFunc: () => {},  // 列表查询方法
+      tableLabel: [
+        {
+          minWidth: 160,
+          label: '表头1',
+          prop: 'a',
+        }, {
+          minWidth: 160,
+          label: '表头2',
+          prop: 'b',
+        }, {
+          minWidth: 160,
+          label: '表头3',
+          prop: 'c',
+        }, {
+          minWidth: 160,
+          label: '表头4',
+          prop: 'd',
+        }, {
+          minWidth: 160,
+          label: '表头5',
+          prop: 'e',
+        }
+      ],
+      tableData: [{}],
+      tableOperation: {
+        minWidth: 200,
+        con: [
+          {
+            type: 'primary',
+            label: '操作按钮'
+          }
+        ]
+      },
+    }
   },
+  methods: {
+    // 列表接口请求参数设置
+    setQueryFilter(filter) {
+      this.queryFilter = Object.assign({}, {
+        query_a: filter.a,
+        query_b: filter.b,
+        query_c: filter.c,
+        query_d: filter.d,
+      })
+    },
+
+    // 接口回调处理
+    callbackDataFormat(data) {
+      console.log(data);
+      // ...
+    },
+  }
 }
 </script>
 
