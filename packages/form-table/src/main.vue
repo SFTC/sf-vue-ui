@@ -4,6 +4,7 @@
       <slot name="before-button">
         <!-- 筛选条件之前的button -->
       </slot>
+      <slot name="search-item"></slot>
       <div class="item" v-for="(item, i) in domFilter" :key="i">
         <span class="label" v-if="item.type !== 'button'">{{item.label}}：</span>
         <el-input

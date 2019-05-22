@@ -14,7 +14,18 @@
       @callbackDataFormat="callbackDataFormat">
       <div slot="before-button">
         <el-button size="small" type="primary" @click="addRole">创建账号</el-button>
-      </div>    
+      </div>
+      <div slot="search-item" class="item">
+        <span class="label">供应商：</span>
+        <el-select v-model="value" placeholder="请选择" size="small">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+      </div>
       <span slot="after-button" style="margin-left:10px;">
         <el-button size="small" type="primary" @click="downLoad">下载</el-button>
         <el-button size="small" type="primary" @click="downLoadAll">下载全部</el-button>
@@ -28,7 +39,7 @@ import { searchKnight } from '../api'
 export default {
   name: 'formt',
   components: {
-    // HelloWorld
+    // LogisticsSupplierStationCascade
   },
   data() {
    const accountStatus = {
@@ -36,6 +47,23 @@ export default {
       2: '离职',
     }
     return {
+      options: [{
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }],
+        value: '',
       queryFilter: {
         work_type:'',
         account_status:'',
