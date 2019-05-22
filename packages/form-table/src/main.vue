@@ -1,6 +1,9 @@
 <template>
   <div wrapper>
     <section class="filter" v-if="domFilter.length">
+      <slot name="before-button">
+        <!-- 筛选条件之前的button -->
+      </slot>
       <div class="item" v-for="(item, i) in domFilter" :key="i">
         <span class="label" v-if="item.type !== 'button'">{{item.label}}：</span>
         <el-input
@@ -18,7 +21,7 @@
           filterable
           clearable>
           <div v-if="Object.prototype.toString.call(item.sugMap) === '[object Array]'">
-            <el-option v-for="(v, i) in item.sugMap" :key="i" :label="v.key" :value="String(v.value)"></el-option>
+            <el-option v-for="(v, i) in item.sugMap" :key="i" :label="v.label" :value="String(v.value)"></el-option>
           </div>
           <div v-if="Object.prototype.toString.call(item.sugMap) === '[object Object]'">
             <el-option  v-for="(v, k, i) in item.sugMap" :key="i" :label="v" :value="k"></el-option>
@@ -53,7 +56,9 @@
         <el-button v-if="item.type == 'button'" size="small" type="primary" @click="item.func">{{ item.label }}</el-button>
       </div>
       <div class="item">
-        <el-button size="small" type="primary" @click="queryFunc">查询</el-button>
+        <el-button size="small" type="primary" @click="queryList">查询</el-button>
+        <!-- 查询之后的button -->
+        <slot name="after-button" />
       </div>
     </section>
     <section class="table">
@@ -64,7 +69,7 @@
           :label="v.label" 
           :min-width="v.minWidth">
           <template slot-scope="scope">
-            <span>{{ scope.row[v.prop] }}</span>
+            <span>{{ v.extends ? v.extends[scope.row[v.prop]]: scope.row[v.prop]}}</span>
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" v-if="Object.keys(tableOperation).length" :min-width="tableOperation.minWidth">
@@ -85,7 +90,7 @@
     <section page v-if="total">
 			<el-pagination
 				@current-change="handleCurrentChange"
-				:current-page.sync="pageIndex"
+				:current-page="currentPage"
 				:page-size="pageSize"
 				layout="total, prev, pager, next"
 				:total="total">
@@ -125,13 +130,6 @@ export default {
     },
 
     /**
-     * 列表查询方法
-     */
-    queryFunc: {
-        type: Function
-    },
-
-    /**
      * @param { tableLabel }  {表格头信息}
      * childrenParam
      * @param { minWidth }    {宽度}
@@ -154,7 +152,14 @@ export default {
         return []
       }
     },
-
+    pageSize:{
+      type:Number,
+      default:10
+    },
+    total:{
+      type:Number,
+      default:0
+    },
     /**
      * @param { tableOperation }   {表格操作栏信息}
      */
@@ -162,6 +167,12 @@ export default {
       type: Object,
       default() {
         return {}
+      }
+    },
+    queryFunc:{
+      type:Function,
+      default(){
+        return ()=>{}
       }
     }
   },
@@ -172,9 +183,7 @@ export default {
       pageFilter: initData.pageFilter,
       limit: initData.limit,
       loading: false,
-      pageSize: 20,
-      pageIndex: 1,
-      total: 0,
+      currentPage:1,
     }
   },
   methods: {
@@ -215,20 +224,19 @@ export default {
     /**
      * 列表查询
      */
-    queryList(index = 1) {
+    queryList() {
       return new Promise((resolve, reject) => {
         this.loading = true
-        this.$emit('setQueryFilter', this.pageFilter)
+        this.$emit('setQueryFilter', {...this.pageFilter,currentPage:this.currentPage})
         this.$nextTick(() => {
           let params = Object.assign(this.queryFilter, {
-            page_no: index,
-            page_size: this.pageSize
+            prepage: this.pageSize
           })
-          this.queryFunc(params).then(res => {
+          this.queryFunc(params)
+          .then(res => {
             this.loading = false
             if (res.errno === 0) {
-              let result = res.result
-              this.total = result.total
+              let result = res.data
               this.$emit('callbackDataFormat', result)
               resolve()
             } else {
@@ -241,8 +249,9 @@ export default {
     /**
      * 翻页
      */
-    handleCurrentChange() {
-        this.queryList(this.pageIndex)
+    handleCurrentChange(current) {
+        this.currentPage = current;
+        this.queryList(this.currentPage)
     },   
   },
 
@@ -250,10 +259,13 @@ export default {
     // 筛选项深度监听自动查询列表 第一次赋值data时查询列表(页面进来自动查询一次列表)
     pageFilter: {
       handler() {
-        this.$emit('setQueryFilter', this.pageFilter)
+        this.$emit('setQueryFilter', {...this.pageFilter,currentPage:this.currentPage})
       },
       deep: true,
     }
+  },
+  mounted(){
+    this.handleCurrentChange();
   }
 }
 </script>

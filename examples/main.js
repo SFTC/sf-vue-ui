@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import App from './App.vue';
-
+import router from './router'
 import element from 'element-ui'
-
+import axios from 'axios'
 Vue.use(element)
+Vue.axios = axios;
+
 import 'element-ui/lib/theme-chalk/index.css';
 // import '../lib/multi-select/multi-select.css';
 // import '../lib/multi-option/multi-option.css';
@@ -24,5 +26,6 @@ Vue.component(formTable.name, formTable);
 Vue.config.productionTip = false;
 
 new Vue({
+  router,
   render: h => h(App),
 }).$mount('#app')

@@ -1,123 +1,297 @@
 <template>
   <div id="app">
-    <FormTable
-      ref="form-table"
-      :queryFilter="queryFilter"
-      :domFilter="domFilter"
-      :queryFunc="queryFunc"
-      :tableLabel="tableLabel"
-      :tableData="tableData"
-      :tableOperation="tableOperation"
-      @setQueryFilter="setQueryFilter"
-      @callbackDataFormat="callbackDataFormat">
-    </FormTable>
+    <v-header></v-header>
+    <el-scrollbar class="page-component__scroll" ref="componentScrollBar">
+    <div class="page-container page-component">
+      <el-scrollbar class="page-component__nav">
+        <v-slide :data='navData'></v-slide>
+      </el-scrollbar>
+      <div class="page-component__content">
+        <router-view class="content"></router-view>
+      </div>
+      <transition name="back-top-fade">
+        <div class="page-component-up"
+             :class="{ 'hover': hover }"
+             v-show="showBackToTop"
+             @mouseenter="hover = true"
+             @mouseleave="hover = false"
+             @click="toTop">
+          <i class="el-icon-caret-top"></i>
+        </div>
+      </transition>
+    </div>
+  </el-scrollbar>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  components: {
-    // HelloWorld
-  },
-  data() {
+  import VHeader from './components/Header';
+  import VSlide from './components/Slide';
+  import navData from './nav.config.json'
+  export default {
+    name: 'app',
+    components: { VHeader, VSlide },
+    data () {
     return {
-      queryFilter: {},      // 列表接口参数
-      domFilter: [
-        {
-          label: '输入',
-          type: 'input',
-          name: 'a',        
-        }, {
-          label: '日期',
-          type: 'date',
-          name: 'b',
-          limit: 10,        // 期末范围控制
-          default: []       // 默认时间
-        }, {                // 下拉框sugMap参数Array转换为 [{key: 'key', value: 'value'}]  Object转换为 {key: value}
-          label: '下拉',
-          type: 'select',
-          sugMap: [
-            {
-              key: 1,
-              value: 'aa'
-            }
-          ],
-        }, {
-          label: '下拉',
-          type: 'select',
-          sugMap: {
-            'key': 'value'
-          },
-        }, {
-          label: 'button',
-          type: 'button',
-          func: () => {}
-        }
-      ],
-      queryFunc: () => {},  // 列表查询方法
-      tableLabel: [
-        {
-          minWidth: 160,
-          label: '表头1',
-          prop: 'a',
-        }, {
-          minWidth: 160,
-          label: '表头2',
-          prop: 'b',
-        }, {
-          minWidth: 160,
-          label: '表头3',
-          prop: 'c',
-        }, {
-          minWidth: 160,
-          label: '表头4',
-          prop: 'd',
-        }, {
-          minWidth: 160,
-          label: '表头5',
-          prop: 'e',
-        }
-      ],
-      tableData: [{}],
-      tableOperation: {
-        minWidth: 200,
-        con: [
-          {
-            type: 'primary',
-            label: '操作按钮'
-          }
-        ]
-      },
+      hover: false,
+      navData,
+      showBackToTop: false,
+      scrollTop: 0,
+      showHeader: true,
+      componentScrollBar: null,
+      componentScrollBoxElement: null
+    };
+  },
+  watch: {
+    '$route.path' () {
+      // 触发伪滚动条更新
+      this.componentScrollBox.scrollTop = 0;
+      this.$nextTick(() => {
+        this.componentScrollBar.update();
+      });
     }
   },
   methods: {
-    // 列表接口请求参数设置
-    setQueryFilter(filter) {
-      this.queryFilter = Object.assign({}, {
-        query_a: filter.a,
-        query_b: filter.b,
-        query_c: filter.c,
-        query_d: filter.d,
-      })
+    renderAnchorHref () {
+      if (/changelog/g.test(location.href)) return;
+      const anchors = document.querySelectorAll('h2 a,h3 a');
+      const basePath = location.href.split('#').splice(0, 2).join('#');
+
+      [].slice.call(anchors).forEach(a => {
+        const href = a.getAttribute('href');
+        a.href = basePath + href;
+      });
     },
 
-    // 接口回调处理
-    callbackDataFormat(data) {
-      console.log(data);
-      // ...
+    goAnchor () {
+      if (location.href.match(/#/g).length > 1) {
+        const anchor = location.href.match(/#[^#]+$/g);
+        if (!anchor) return;
+        const elm = document.querySelector(anchor[0]);
+        if (!elm) return;
+
+        setTimeout(() => {
+          this.componentScrollBox.scrollTop = elm.offsetTop;
+        }, 50);
+      }
     },
+    toTop () {
+      this.hover = false;
+      this.showBackToTop = false;
+      this.componentScrollBox.scrollTop = 0;
+    },
+
+    handleScroll () {
+      const scrollTop = this.componentScrollBox.scrollTop;
+      this.showBackToTop = scrollTop >= 0.5 * document.body.clientHeight;
+      if (this.showHeader !== this.scrollTop > scrollTop) {
+        this.showHeader = this.scrollTop > scrollTop;
+      }
+      if (scrollTop === 0) {
+        this.showHeader = true;
+      }
+      this.scrollTop = scrollTop;
+    }
+  },
+  created () {
+    window.addEventListener('hashchange', () => {
+      if (location.href.match(/#/g).length < 2) {
+        document.documentElement.scrollTop = document.body.scrollTop = 0;
+        this.renderAnchorHref();
+      } else {
+        this.goAnchor();
+      }
+    });
+  },
+  mounted () {
+    this.componentScrollBar = this.$refs.componentScrollBar;
+    this.componentScrollBox = this.componentScrollBar.$el.querySelector('.el-scrollbar__wrap');
+    this.componentScrollBox.addEventListener('scroll', this.throttledScrollHandler);
+    this.renderAnchorHref();
+    this.goAnchor();
+    document.body.classList.add('is-component');
+  },
+  destroyed () {
+    document.body.classList.remove('is-component');
+  },
+  beforeDestroy () {
+    this.componentScrollBox.removeEventListener('scroll', this.throttledScrollHandler);
+  }
+  };
+</script>
+<style>
+html,body{
+  height: 100%;
+}
+</style>
+
+<style lang="less" scoped>
+#app{
+  height: 100%;
+}
+.page-component__scroll {
+  height: 100%;
+  background-color: #fff;
+  .el-scrollbar__wrap {
+    overflow-x: auto;
+  }
+  .el-scrollbar__view{
+    height: 100%;
   }
 }
-</script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: left;
-  color: #2c3e50;
-  margin-top: 60px;
+.page-component {
+  box-sizing: border-box;
+  height: 100%;
+
+  &.page-container {
+    padding: 0;
+    width: 1140px;
+    margin: 0 auto;
+  }
+
+  .page-component__nav {
+    width: 180px;
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    margin-top: 80px;
+    transition: padding-top 0.3s;
+
+    .el-scrollbar__wrap {
+      height: 100%;
+    }
+
+    &.is-extended {
+      padding-top: 0;
+    }
+  }
+
+  .side-nav {
+    height: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 0;
+
+    & > ul {
+      padding-bottom: 50px;
+    }
+  }
+
+  .page-component__content {
+    padding-left: 210px;
+    padding-bottom: 100px;
+    box-sizing: border-box;
+  }
+
+  .content {
+    padding-top: 50px;
+
+      h3 {
+        margin: 55px 0 20px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        background-color: #fff;
+        font-size: 14px;
+        margin-bottom: 45px;
+        line-height: 1.5em;
+
+        strong {
+          font-weight: normal;
+        }
+
+        td,
+        th {
+          border-bottom: 1px solid #d8d8d8;
+          padding: 15px;
+          max-width: 250px;
+        }
+
+        th {
+          text-align: left;
+          white-space: nowrap;
+          color: #666;
+          font-weight: normal;
+        }
+
+        td {
+          color: #333;
+        }
+
+        th:first-child,
+        td:first-child {
+          padding-left: 10px;
+        }
+      }
+
+      ul:not(.timeline) {
+        margin: 10px 0;
+        padding: 0 0 0 20px;
+        font-size: 14px;
+        color: #5e6d82;
+        line-height: 2em;
+      }
+  }
+
+  .page-component-up {
+    background-color: #fff;
+    position: fixed;
+    right: 100px;
+    bottom: 150px;
+    size: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
+    z-index: 5;
+
+    i {
+      color: #409eff;
+      display: block;
+      line-height: 40px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    &.hover {
+      opacity: 1;
+    }
+  }
+  .back-top-fade-enter,
+  .back-top-fade-leave-active {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-component {
+    .page-component__nav {
+      width: 100%;
+      position: static;
+      margin-top: 0;
+    }
+    .side-nav {
+      padding-top: 0;
+      padding-left: 50px;
+    }
+    .page-component__content {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    .content {
+      padding-top: 0;
+    }
+    .content > table {
+      overflow: auto;
+      display: block;
+    }
+    .page-component-up {
+      display: none;
+    }
+  }
 }
 </style>
