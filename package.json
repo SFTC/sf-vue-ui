@@ -22,8 +22,12 @@
     "eslint": "^5.8.0",
     "eslint-plugin-html": "^5.0.3",
     "eslint-plugin-vue": "^5.0.0",
+    "github-markdown-css": "^3.0.1",
+    "highlight.js": "^9.15.8",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
+    "marked": "^0.6.2",
+    "raw-loader": "^2.0.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.6",
     "vue-template-compiler": "^2.5.21"

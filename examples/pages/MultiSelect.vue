@@ -1,22 +1,29 @@
 <template>
   <div id="app">
-    <multi-select placeholder="请选择内容" v-model="value">
-      <multi-option
-        v-for="item in options"
-        :key="item.value"
-        :value="item.value"
-        :label="item.label"
-      ></multi-option>
-    </multi-select>
+    <div class="component__detail">
+      <multi-select placeholder="请选择内容" v-model="value">
+        <multi-option
+          v-for="item in options"
+          :key="item.value"
+          :value="item.value"
+          :label="item.label"
+        ></multi-option>
+      </multi-select>
+    </div>
+    <div class="component__explain">
+      <markdown :content="markdownContent.default"></markdown>
+    </div>
   </div>
 </template>
 
 <script>
-
+import Markdown from '../components/Markdown';
+const lsa = require('../components/markdownfiles/MultiSelect.md');
 export default {
   name: 'multi',
   data() {
     return {
+      markdownContent:lsa,
       value: [],
       options: [{
           value: '选项1',
@@ -36,6 +43,9 @@ export default {
         }]
     };
   },
+  components:{
+    Markdown
+  }
 }
 </script>
 <style scoped>

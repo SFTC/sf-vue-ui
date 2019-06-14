@@ -17,10 +17,18 @@ module.exports = {
     .include
     .add(path.resolve(__dirname, 'packages'))
     .end()
+
     .use('babel')
     .loader('babel-loader')
     .tap(options => {
       return options;
     })
+    
+    config.module
+    .rule('md')
+    .test(/\.md$/)
+    .use('raw-loader')
+    .loader('raw-loader')
+    .end()
   },
 };
