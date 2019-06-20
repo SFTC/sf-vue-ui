@@ -1,7 +1,10 @@
 import Demo from './demo';
+import Tree from './tree';
+
 // 组件列表
 const components = [
   Demo,
+  Tree,
 ];
 
 // 如果使用 use 注册插件，则所有的组件都将被注册
@@ -21,6 +24,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default {
   install,
   Demo,
+  Tree,
 };
 
 

@@ -3,6 +3,7 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="SF 组件的展示页面"/>
     <Demo />
+    <Tree />
   </div>
 </template>
 

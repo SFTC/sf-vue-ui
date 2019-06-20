@@ -23,4 +23,10 @@ module.exports = {
       return options;
     })
   },
+  devServer: {
+    overlay: {
+      warnings: true,
+      errors: true,
+    },
+  },
 };

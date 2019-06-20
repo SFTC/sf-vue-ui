@@ -9,6 +9,8 @@
     "lib": "vue-cli-service build --target lib --name sf-vue-ui --dest lib packages/index.js"
   },
   "dependencies": {
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
     "vue": "^2.6.6"
   },
   "devDependencies": {

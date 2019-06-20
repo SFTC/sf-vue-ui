@@ -11,7 +11,10 @@ export default {
   },
   computed: {},
   methods: {},
-  mounted() {},
+  mounted() {
+      console.log(111);
+         console.log(2222);
+  },
 }
 </script>
 
