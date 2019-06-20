@@ -4,6 +4,9 @@
     <HelloWorld msg="SF 组件的展示页面"/>
     <Demo />
     <Tree />
+    <MultiSelect>
+      <MultiOption></MultiOption>
+    </MultiSelect>
   </div>
 </template>
 
