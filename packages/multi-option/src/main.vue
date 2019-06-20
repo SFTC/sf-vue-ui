@@ -10,7 +10,7 @@
 
 <script>
 // element自带工具函数, dispatch和brocast，向上派发和向下派发事件
-import Emitter from 'element-ui/lib/mixins/emitter';
+import Emitter from 'element-ui/lib/mixins/emitter'
 
 export default {
   mixins: [Emitter],
@@ -19,39 +19,39 @@ export default {
   componentName: 'MultiOption',
   props: {
     value: [String, Number],
-    label: [String, Number],
+    label: [String, Number]
   },
-  data() {
+  data () {
     return {
       selected: false,
-      hide: false,
-    };
+      hide: false
+    }
   },
   methods: {
-    handleInitSelect(bool) {
-      this.selected = bool;
+    handleInitSelect (bool) {
+      this.selected = bool
     },
-    handleClick() {
-      this.selected = !this.selected;
-      this.dispatch('MultiSelect', 'selectItem', this);
+    handleClick () {
+      this.selected = !this.selected
+      this.dispatch('MultiSelect', 'selectItem', this)
     },
-    handleUpdate(val) {
+    handleUpdate (val) {
       // eslint-disable-next-line
       (val === this.value) ? this.selected = true : undefined;
-    },
+    }
   },
-  created() {
-    this.$on('initSelected', this.handleInitSelect);
-    this.$on('updateSelected', this.handleUpdate);
+  created () {
+    this.$on('initSelected', this.handleInitSelect)
+    this.$on('updateSelected', this.handleUpdate)
 
     // 级联数据发生变化时，触发创建事件，此时向上派发数据变化信息
-    this.dispatch('MultiSelect', 'optionsChange');
+    this.dispatch('MultiSelect', 'optionsChange')
   },
   // 级联数据发生变化时，触发销毁事件，此时向上派发数据变化信息
-  beforeDestroy() {
-    this.dispatch('MultiSelect', 'optionsChange');
-  },
-};
+  beforeDestroy () {
+    this.dispatch('MultiSelect', 'optionsChange')
+  }
+}
 </script>
 
 <style>
@@ -74,5 +74,4 @@ export default {
   visibility: hidden !important;
 }
 </style>
-
 

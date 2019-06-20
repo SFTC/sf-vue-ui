@@ -6,12 +6,15 @@
 export default {
   name: 'Demo',
   props: {},
-  data() {
-    return {};
+  data () {
+    return {}
   },
   computed: {},
   methods: {},
-  mounted() {},
+  mounted () {
+    console.log(111)
+    console.log(2222)
+  }
 }
 </script>
 

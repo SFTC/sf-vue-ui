@@ -11,6 +11,13 @@
     "build:multioption": "vue-cli-service build --target lib --name multi-option --dest lib/multi-option packages/multi-option/src/main.vue",
     "lib": "vue-cli-service build --target lib --name tc-vue-ui --dest lib packages/index.js"
   },
+  "dependencies": {
+    "echarts": "^4.2.1",
+    "element-ui": "^2.7.2",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "vue": "^2.6.6"
+  },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-plugin-eslint": "^3.5.0",
@@ -22,6 +29,7 @@
     "eslint": "^5.8.0",
     "eslint-plugin-html": "^5.0.3",
     "eslint-plugin-vue": "^5.0.0",
+    "eslint-plugin-vue-libs": "^3.0.0",
     "github-markdown-css": "^3.0.1",
     "highlight.js": "^9.15.8",
     "less": "^3.9.0",
