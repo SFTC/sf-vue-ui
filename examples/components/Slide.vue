@@ -43,7 +43,7 @@
                 <li class="nav-item"
                     v-for="(navItem,index) in group.list"
                     :key="index">
-                  <router-link 
+                  <router-link
                       v-if="!navItem.disabled"
                       active-class="active"
                       :to="base + navItem.path"
@@ -74,79 +74,79 @@ export default {
       navState: [],
       isSmallScreen: false,
       isFade: false
-    };
+    }
   },
   watch: {
     '$route.path' () {
-      this.handlePathChange();
+      this.handlePathChange()
     }
   },
   computed: {
     navStyle () {
-      const style = {};
+      const style = {}
       if (this.isSmallScreen) {
-        style.paddingBottom = '60px';
+        style.paddingBottom = '60px'
       }
-      style.opacity = this.isFade ? '0.5' : '1';
-      return style;
+      style.opacity = this.isFade ? '0.5' : '1'
+      return style
     },
     lang () {
-      return this.$route.meta.lang;
+      return this.$route.meta.lang
     },
     langConfig () {
       return {
         'dropdown': '版本：'
-      };
+      }
     }
   },
   methods: {
     handleResize () {
-      this.isSmallScreen = document.documentElement.clientWidth < 768;
-      this.handlePathChange();
+      this.isSmallScreen = document.documentElement.clientWidth < 768
+      this.handlePathChange()
     },
     handlePathChange () {
       if (!this.isSmallScreen) {
-        this.expandAllMenu();
-        return;
+        this.expandAllMenu()
+        return
       }
       this.$nextTick(() => {
-        this.hideAllMenu();
-        let activeAnchor = this.$el.querySelector('a.active');
-        let ul = activeAnchor.parentNode;
+        this.hideAllMenu()
+        const activeAnchor = this.$el.querySelector('a.active')
+        let ul = activeAnchor.parentNode
         while (ul.tagName !== 'UL') {
-          ul = ul.parentNode;
+          ul = ul.parentNode
         }
-        ul.style.height = 'auto';
-      });
+        ul.style.height = 'auto'
+      })
     },
     hideAllMenu () {
       [].forEach.call(this.$el.querySelectorAll('.pure-menu-list'), ul => {
-        ul.style.height = '0';
-      });
+        ul.style.height = '0'
+      })
     },
     expandAllMenu () {
       [].forEach.call(this.$el.querySelectorAll('.pure-menu-list'), ul => {
-        ul.style.height = 'auto';
-      });
+        ul.style.height = 'auto'
+      })
     },
     expandMenu (event) {
-      if (!this.isSmallScreen) return;
-      let target = event.currentTarget;
-      if (!target.nextElementSibling || target.nextElementSibling.tagName !== 'UL') return;
-      this.hideAllMenu();
-      event.currentTarget.nextElementSibling.style.height = 'auto';
+      if (!this.isSmallScreen) return
+      const target = event.currentTarget
+      if (!target.nextElementSibling || target.nextElementSibling.tagName !== 'UL') return
+      this.hideAllMenu()
+      event.currentTarget.nextElementSibling.style.height = 'auto'
     }
   },
   created () {
   },
   mounted () {
-    this.handleResize();
-    window.addEventListener('resize', this.handleResize);
+    this.handleResize()
+    window.addEventListener('resize', this.handleResize)
   },
   beforeDestroy () {
-    window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener('resize', this.handleResize)
   }
-};
+}
 </script>
 <style lang="less">
 .side-nav {

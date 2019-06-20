@@ -25,13 +25,13 @@
 </template>
 
 <script>
-  import VHeader from './components/Header';
-  import VSlide from './components/Slide';
-  import navData from './nav.config.json'
-  export default {
-    name: 'app',
-    components: { VHeader, VSlide },
-    data () {
+import VHeader from './components/Header'
+import VSlide from './components/Slide'
+import navData from './nav.config.json'
+export default {
+  name: 'app',
+  components: { VHeader, VSlide },
+  data () {
     return {
       hover: false,
       navData,
@@ -40,84 +40,84 @@
       showHeader: true,
       componentScrollBar: null,
       componentScrollBoxElement: null
-    };
+    }
   },
   watch: {
     '$route.path' () {
       // 触发伪滚动条更新
-      this.componentScrollBox.scrollTop = 0;
+      this.componentScrollBox.scrollTop = 0
       this.$nextTick(() => {
-        this.componentScrollBar.update();
-      });
+        this.componentScrollBar.update()
+      })
     }
   },
   methods: {
     renderAnchorHref () {
-      if (/changelog/g.test(location.href)) return;
-      const anchors = document.querySelectorAll('h2 a,h3 a');
+      if (/changelog/g.test(location.href)) return
+      const anchors = document.querySelectorAll('h2 a,h3 a')
       const basePath = location.href.split('#').splice(0, 2).join('#');
 
       [].slice.call(anchors).forEach(a => {
-        const href = a.getAttribute('href');
-        a.href = basePath + href;
-      });
+        const href = a.getAttribute('href')
+        a.href = basePath + href
+      })
     },
 
     goAnchor () {
       if (location.href.match(/#/g).length > 1) {
-        const anchor = location.href.match(/#[^#]+$/g);
-        if (!anchor) return;
-        const elm = document.querySelector(anchor[0]);
-        if (!elm) return;
+        const anchor = location.href.match(/#[^#]+$/g)
+        if (!anchor) return
+        const elm = document.querySelector(anchor[0])
+        if (!elm) return
 
         setTimeout(() => {
-          this.componentScrollBox.scrollTop = elm.offsetTop;
-        }, 50);
+          this.componentScrollBox.scrollTop = elm.offsetTop
+        }, 50)
       }
     },
     toTop () {
-      this.hover = false;
-      this.showBackToTop = false;
-      this.componentScrollBox.scrollTop = 0;
+      this.hover = false
+      this.showBackToTop = false
+      this.componentScrollBox.scrollTop = 0
     },
 
     handleScroll () {
-      const scrollTop = this.componentScrollBox.scrollTop;
-      this.showBackToTop = scrollTop >= 0.5 * document.body.clientHeight;
+      const scrollTop = this.componentScrollBox.scrollTop
+      this.showBackToTop = scrollTop >= 0.5 * document.body.clientHeight
       if (this.showHeader !== this.scrollTop > scrollTop) {
-        this.showHeader = this.scrollTop > scrollTop;
+        this.showHeader = this.scrollTop > scrollTop
       }
       if (scrollTop === 0) {
-        this.showHeader = true;
+        this.showHeader = true
       }
-      this.scrollTop = scrollTop;
+      this.scrollTop = scrollTop
     }
   },
   created () {
     window.addEventListener('hashchange', () => {
       if (location.href.match(/#/g).length < 2) {
-        document.documentElement.scrollTop = document.body.scrollTop = 0;
-        this.renderAnchorHref();
+        document.documentElement.scrollTop = document.body.scrollTop = 0
+        this.renderAnchorHref()
       } else {
-        this.goAnchor();
+        this.goAnchor()
       }
-    });
+    })
   },
   mounted () {
-    this.componentScrollBar = this.$refs.componentScrollBar;
-    this.componentScrollBox = this.componentScrollBar.$el.querySelector('.el-scrollbar__wrap');
-    this.componentScrollBox.addEventListener('scroll', this.throttledScrollHandler);
-    this.renderAnchorHref();
-    this.goAnchor();
-    document.body.classList.add('is-component');
+    this.componentScrollBar = this.$refs.componentScrollBar
+    this.componentScrollBox = this.componentScrollBar.$el.querySelector('.el-scrollbar__wrap')
+    this.componentScrollBox.addEventListener('scroll', this.throttledScrollHandler)
+    this.renderAnchorHref()
+    this.goAnchor()
+    document.body.classList.add('is-component')
   },
   destroyed () {
-    document.body.classList.remove('is-component');
+    document.body.classList.remove('is-component')
   },
   beforeDestroy () {
-    this.componentScrollBox.removeEventListener('scroll', this.throttledScrollHandler);
+    this.componentScrollBox.removeEventListener('scroll', this.throttledScrollHandler)
   }
-  };
+}
 </script>
 <style>
 html,body{

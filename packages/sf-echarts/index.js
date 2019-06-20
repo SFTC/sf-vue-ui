@@ -1,7 +1,7 @@
-import SfEcharts from "./src/SfEcharts";
+import SfEcharts from './src/SfEcharts'
 /* istanbul ignore next */
-SfEcharts.install = function(Vue) {
-  Vue.component(SfEcharts.name, SfEcharts);
-};
+SfEcharts.install = function (Vue) {
+  Vue.component(SfEcharts.name, SfEcharts)
+}
 
-export default SfEcharts;
+export default SfEcharts
