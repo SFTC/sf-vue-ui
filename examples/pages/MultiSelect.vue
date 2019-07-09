@@ -10,19 +10,21 @@
         ></multi-option>
       </multi-select>
     </div>
-    <div class="component__explain">
-      <markdown :content="markdownContent.default"></markdown>
-    </div>
+    <collapse-panel :markdownContent="markdownContent.default"></collapse-panel>
+    <api-content :tableDataList="config"></api-content>
   </div>
 </template>
 
 <script>
-import Markdown from '../components/Markdown';
+import CollapsePanel from '../components/CollapsePanel';
+import ApiContent from '../components/api';
+import { config } from '../static/multiselect'; 
 const lsa = require('../components/markdownfiles/MultiSelect.md');
 export default {
   name: 'multi',
   data() {
     return {
+      config,
       markdownContent:lsa,
       value: [],
       options: [{
@@ -44,7 +46,8 @@ export default {
     };
   },
   components:{
-    Markdown
+    CollapsePanel,
+    ApiContent
   }
 }
 </script>

@@ -17,6 +17,6 @@ export default {
     color: #fff;
     width: 100%;
     height: 80px;
-    background: #284be8;
+    background: #409eff;
   }
 </style>
