@@ -1,31 +1,31 @@
-import Vue from 'vue';
-import App from './App.vue';
+import Vue from 'vue'
+import App from './App.vue'
 import router from './router'
 import element from 'element-ui'
 import axios from 'axios'
 Vue.use(element)
-Vue.axios = axios;
+Vue.axios = axios
 
-import 'element-ui/lib/theme-chalk/index.css';
+import 'element-ui/lib/theme-chalk/index.css'
 // import '../lib/multi-select/multi-select.css';
 // import '../lib/multi-option/multi-option.css';
 
 // 导入组件库
-import multiSelect from '../packages/multi-select/index';
-import multiOption from '../packages/multi-option/index';
-import formTable from '../packages/form-table/index';
+import multiSelect from '../packages/multi-select/index'
+import multiOption from '../packages/multi-option/index'
+import formTable from '../packages/form-table/index'
 // import multiSelect from '../lib/multi-select/multi-select.umd.min.js';
 // import multiOption from '../lib/multi-option/multi-option.umd.min.js';
 // const multiSelect = require('../lib/sftc-multiselect.umd.min').default;
 // 注册组件库
 // Vue.use(multiSelect);
-Vue.component(multiSelect.name, multiSelect);
-Vue.component(multiOption.name, multiOption);
-Vue.component(formTable.name, formTable);
+Vue.component(multiSelect.name, multiSelect)
+Vue.component(multiOption.name, multiOption)
+Vue.component(formTable.name, formTable)
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = false
 
 new Vue({
   router,
-  render: h => h(App),
+  render: h => h(App)
 }).$mount('#app')

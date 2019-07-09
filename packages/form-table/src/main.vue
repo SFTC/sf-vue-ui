@@ -10,15 +10,15 @@
         <el-input
           v-if="item.type == 'input'"
           v-model.trim="pageFilter[item.name]"
-          size="small" 
-          :placeholder="`请输入${item.label}`" 
+          size="small"
+          :placeholder="`请输入${item.label}`"
           clearable>
         </el-input>
         <el-select
           v-if="item.type == 'select'"
           v-model="pageFilter[item.name]"
           size="small"
-          :placeholder="`请选择${item.label}`" 
+          :placeholder="`请选择${item.label}`"
           filterable
           clearable>
           <div v-if="Object.prototype.toString.call(item.sugMap) === '[object Array]'">
@@ -32,7 +32,7 @@
           v-if="item.type == 'date'"
           v-model="pageFilter[item.name]"
           size="small"
-          :placeholder="`请选择${item.label}`" 
+          :placeholder="`请选择${item.label}`"
           type="daterange"
           range-separator="至"
           start-placeholder="开始日期"
@@ -47,7 +47,7 @@
           v-if="item.type == 'datetime'"
           v-model="pageFilter[item.name]"
           size="small"
-          :placeholder="`请选择${item.label}`" 
+          :placeholder="`请选择${item.label}`"
           type="datetimerange"
           range-separator="至"
           start-placeholder="开始日期"
@@ -64,10 +64,10 @@
     </section>
     <section class="table">
       <el-table :data="tableData" border stripe v-loading="loading">
-        <el-table-column 
-          v-for="(v, i) in tableLabel" 
-          :key="i" 
-          :label="v.label" 
+        <el-table-column
+          v-for="(v, i) in tableLabel"
+          :key="i"
+          :label="v.label"
           :min-width="v.minWidth">
           <template slot-scope="scope">
             <span>{{ v.extends ? v.extends[scope.row[v.prop]]: scope.row[v.prop]}}</span>
@@ -109,7 +109,7 @@ export default {
      */
     queryFilter: {
       type: Object,
-      default() {
+      default () {
         return {}
       }
     },
@@ -125,7 +125,7 @@ export default {
      */
     domFilter: {
       type: Array,
-      default() {
+      default () {
         return []
       }
     },
@@ -139,7 +139,7 @@ export default {
      */
     tableLabel: {
       type: Array,
-      default() {
+      default () {
         return []
       }
     },
@@ -149,51 +149,51 @@ export default {
      */
     tableData: {
       type: Array,
-      default() {
+      default () {
         return []
       }
     },
-    pageSize:{
-      type:Number,
-      default:10
+    pageSize: {
+      type: Number,
+      default: 10
     },
-    total:{
-      type:Number,
-      default:0
+    total: {
+      type: Number,
+      default: 0
     },
     /**
      * @param { tableOperation }   {表格操作栏信息}
      */
     tableOperation: {
       type: Object,
-      default() {
+      default () {
         return {}
       }
     },
-    queryFunc:{
-      type:Function,
-      default(){
-        return ()=>{}
+    queryFunc: {
+      type: Function,
+      default () {
+        return () => {}
       }
     }
   },
-  data() {
+  data () {
     // 初始化data数据
-    let initData = this.init()
+    const initData = this.init()
     return {
       pageFilter: initData.pageFilter,
       limit: initData.limit,
       loading: false,
-      currentPage:1,
+      currentPage: 1
     }
   },
   methods: {
     /**
      * 参数初始化
      */
-    init() {
-      let pageFilter = {},
-          limit = {}
+    init () {
+      const pageFilter = {}
+      const limit = {}
       this.domFilter.forEach(v => {
         pageFilter[v.name] = v.default || null
         if (v.limit) {
@@ -206,38 +206,38 @@ export default {
     /**
      * 日期范围限制
      */
-		disabledDate(date, name, limit) {
-			const today = new Date().getTime()
-			const originTime = date.getTime()
-			if (this['limit'][`${name}Limit`][0] && !this['limit'][`${name}Limit`][1]) {
-				const startTime = new Date(this['limit'][`${name}Limit`][0]).getTime()
-				return originTime > Math.min(today, (startTime + (limit * 24 * 3600 * 1000))) || originTime < startTime - (limit * 24 * 3600 * 1000)
-			}
-			return originTime > today
-		},
-		handlePick({ maxDate, minDate }, name) {
-			if (maxDate && minDate) {
-				this['pageFilter'][name] = [minDate, maxDate]
-			}
-			this['limit'][`${name}Limit`] = [minDate, maxDate]
+    disabledDate (date, name, limit) {
+      const today = new Date().getTime()
+      const originTime = date.getTime()
+      if (this['limit'][`${name}Limit`][0] && !this['limit'][`${name}Limit`][1]) {
+        const startTime = new Date(this['limit'][`${name}Limit`][0]).getTime()
+        return originTime > Math.min(today, (startTime + (limit * 24 * 3600 * 1000))) || originTime < startTime - (limit * 24 * 3600 * 1000)
+      }
+      return originTime > today
     },
-    
+    handlePick ({ maxDate, minDate }, name) {
+      if (maxDate && minDate) {
+        this['pageFilter'][name] = [minDate, maxDate]
+      }
+      this['limit'][`${name}Limit`] = [minDate, maxDate]
+    },
+
     /**
      * 列表查询
      */
-    queryList() {
+    queryList () {
       return new Promise((resolve, reject) => {
         this.loading = true
-        this.$emit('setQueryFilter', {...this.pageFilter,currentPage:this.currentPage})
+        this.$emit('setQueryFilter', { ...this.pageFilter, currentPage: this.currentPage })
         this.$nextTick(() => {
-          let params = Object.assign(this.queryFilter, {
+          const params = Object.assign(this.queryFilter, {
             prepage: this.pageSize
           })
           this.queryFunc(params)
           .then(res => {
             this.loading = false
             if (res.errno === 0) {
-              let result = res.data
+              const result = res.data
               this.$emit('callbackDataFormat', result)
               resolve()
             } else {
@@ -245,28 +245,28 @@ export default {
             }
           })
         })
-      }) 
+      })
     },
     /**
      * 翻页
      */
-    handleCurrentChange(current) {
-        this.currentPage = current;
-        this.queryList(this.currentPage)
-    },   
+    handleCurrentChange (current) {
+      this.currentPage = current
+      this.queryList(this.currentPage)
+    }
   },
 
   watch: {
     // 筛选项深度监听自动查询列表 第一次赋值data时查询列表(页面进来自动查询一次列表)
     pageFilter: {
-      handler() {
-        this.$emit('setQueryFilter', {...this.pageFilter,currentPage:this.currentPage})
+      handler () {
+        this.$emit('setQueryFilter', { ...this.pageFilter, currentPage: this.currentPage })
       },
-      deep: true,
+      deep: true
     }
   },
-  mounted(){
-    this.handleCurrentChange();
+  mounted () {
+    this.handleCurrentChange()
   }
 }
 </script>

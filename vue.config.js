@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   pages: {
@@ -8,8 +8,8 @@ module.exports = {
       // 模版来源
       template: 'public/index.html',
       // 在 dist/index.html 的输出
-      filename: 'index.html',
-    },
+      filename: 'index.html'
+    }
   },
   chainWebpack: config => {
     config.module
@@ -21,9 +21,9 @@ module.exports = {
     .use('babel')
     .loader('babel-loader')
     .tap(options => {
-      return options;
+      return options
     })
-    
+
     config.module
     .rule('md')
     .test(/\.md$/)
@@ -31,4 +31,10 @@ module.exports = {
     .loader('raw-loader')
     .end()
   },
-};
+  devServer: {
+    overlay: {
+      warnings: true,
+      errors: true
+    }
+  }
+}
