@@ -12,20 +12,20 @@
 </template>
 
 <script>
-  import Markdown from './Markdown';
+import Markdown from './Markdown'
 
-  export default {
-    name: 'CollapsePanel',
-    components: {
-      Markdown,
-    },
-    props: {
-      markdownContent: {
-        type: String,
-        default: '暂无',
-      },
-    },
-  };
+export default {
+  name: 'CollapsePanel',
+  components: {
+    Markdown
+  },
+  props: {
+    markdownContent: {
+      type: String,
+      default: '暂无'
+    }
+  }
+}
 </script>
 
 <style lang="less">

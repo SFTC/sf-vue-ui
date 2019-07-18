@@ -130,7 +130,7 @@ html,body{
   height: 100%;
 }
 .page-component__scroll {
-  height: 100%;
+  height: calc(100% - 80px);
   background-color: #fff;
   .el-scrollbar__wrap {
     overflow-x: auto;

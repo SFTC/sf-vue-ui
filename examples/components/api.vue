@@ -29,10 +29,16 @@
         <el-table-column
           prop="option"
           label="可选值">
+          <template slot-scope="scope">
+            {{scope.row.option || '-'}}
+          </template>
         </el-table-column>
         <el-table-column
           prop="default"
           label="默认值">
+          <template slot-scope="scope">
+            {{scope.row.default || '-'}}
+          </template>
         </el-table-column>
       </el-table>
       <el-table
@@ -52,6 +58,9 @@
         <el-table-column
           prop="arguments"
           label="回调参数">
+          <template slot-scope="scope">
+            {{scope.row.arguments || '-'}}
+          </template>
         </el-table-column>
       </el-table>
       <el-table
@@ -75,32 +84,32 @@
 </template>
 
 <script>
-  export default {
-    name: 'api',
-    props: {
-      apiIntroduce: {
-        type: Object,
-        default () {
-          return {
-            name: 'API',
-            introd: '适用平台：VUE移动端项目'
-          }
-        }
-      },
-      tableDataList: {
-        type: Array,
-        default () {
-          return []
+export default {
+  name: 'api',
+  props: {
+    apiIntroduce: {
+      type: Object,
+      default () {
+        return {
+          name: 'API',
+          introd: '适用平台：VUE移动端项目'
         }
       }
     },
-    data () {
-      return {
-        introduce: {
-        }
+    tableDataList: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
+  },
+  data () {
+    return {
+      introduce: {
       }
     }
   }
+}
 </script>
 
 <style scoped>
