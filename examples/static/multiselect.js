@@ -29,5 +29,21 @@ export const config = [
         'introduce': '传出输入框中的值组成的对象',
         'arguments': '目前选中的值'
       }]
+  },
+  {
+    'name': 'Option Props',
+    'type': 'API',
+    'introduce': '',
+    'tableData': [
+      {
+        'attr': 'value',
+        'introduce': '列表展示的值',
+        'type': ''
+      },
+      {
+        'attr': 'label',
+        'introduce': '列表传给后端的值',
+        'type': ''
+      }]
   }
 ]

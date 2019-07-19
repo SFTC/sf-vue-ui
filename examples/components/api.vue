@@ -2,7 +2,7 @@
   <div class="api">
     <div  v-for="(item,index) in tableDataList" :key="index">
       <section class="markdown api-container">
-        <h2><span>{{item.name}}</span></h2>
+        <h2 class="p-10"><span>{{item.name}}</span></h2>
         <ul v-if="item.rules">
           <li v-for="(it,i) in item.rules" :key="i">{{it}}</li>
         </ul>
@@ -113,5 +113,7 @@ export default {
 </script>
 
 <style scoped>
-
+.p-10{
+  padding: 10px 0;
+}
 </style>

@@ -90,7 +90,7 @@ export default {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
-  margin: 10px;
+  margin: 15px;
   font-size: 12px;
 
   .example__info {
