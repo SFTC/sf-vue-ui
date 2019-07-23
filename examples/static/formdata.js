@@ -1,13 +1,13 @@
 export const config = [
   {
-    'name': 'Select Props',
+    'name': 'FormTable Slot',
     'type': 'API',
     'introduce': '',
     'tableData': [
       {
-        'attr': 'value',
-        'introduce': '输入框的值',
-        'type': 'Array'
+        'attr': 'before-button',
+        'introduce': 'form选择之前的插槽',
+        'type': '元素'
       }, {
         'attr': 'placeholder',
         'introduce': 'placeholder',

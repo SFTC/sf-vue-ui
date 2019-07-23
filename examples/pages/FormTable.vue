@@ -1,45 +1,54 @@
 <template>
   <div id="app">
-    <form-table
-      ref="form-table"
-      :queryFilter="queryFilter"
-      :domFilter="domFilter"
-      :queryFunc="queryFunc"
-      :tableLabel="tableLabel"
-      :tableData="tableData"
-      :pageSize="pageSize"
-      :total="total"
-      :tableOperation="tableOperation"
-      @setQueryFilter="setQueryFilter"
-      @callbackDataFormat="callbackDataFormat">
-      <div slot="before-button">
-        <el-button size="small" type="primary" @click="addRole">创建账号</el-button>
-      </div>
-      <div slot="search-item" class="item">
-        <span class="label">供应商：</span>
-        <el-select v-model="value" placeholder="请选择" size="small">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-      </div>
-      <span slot="after-button" style="margin-left:10px;">
-        <el-button size="small" type="primary" @click="downLoad">下载</el-button>
-        <el-button size="small" type="primary" @click="downLoadAll">下载全部</el-button>
-      </span>
-    </form-table>
+    <div class="example-area">
+      <form-table
+        ref="form-table"
+        :queryFilter="queryFilter"
+        :domFilter="domFilter"
+        :queryFunc="queryFunc"
+        :tableLabel="tableLabel"
+        :tableData="tableData"
+        :pageSize="pageSize"
+        :total="total"
+        :tableOperation="tableOperation"
+        @setQueryFilter="setQueryFilter"
+        @callbackDataFormat="callbackDataFormat">
+        <div slot="before-button">
+          <el-button size="small" type="primary" @click="addRole">创建账号</el-button>
+        </div>
+        <div slot="search-item" class="item">
+          <span class="label">供应商：</span>
+          <el-select v-model="value" placeholder="请选择" size="small">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+        <span slot="after-button" style="margin-left:10px;">
+          <el-button size="small" type="primary" @click="downLoad">下载</el-button>
+          <el-button size="small" type="primary" @click="downLoadAll">下载全部</el-button>
+        </span>
+      </form-table>
+      <collapse-panel :markdownContent="lsa.default"></collapse-panel>
+    </div>
+    <api-content :tableDataList="config"></api-content>
   </div>
 </template>
 
 <script>
 import { searchKnight } from '../api'
+import CollapsePanel from '../components/CollapsePanel'
+import ApiContent from '../components/api'
+import { config } from '../static/formdata'
+const lsa = require('../components/markdownfiles/FormData.md')
 export default {
   name: 'formt',
   components: {
-    // LogisticsSupplierStationCascade
+    CollapsePanel,
+    ApiContent
   },
   data () {
     const accountStatus = {
@@ -47,6 +56,8 @@ export default {
       2: '离职'
     }
     return {
+      lsa,
+      config,
       options: [{
         value: '选项1',
         label: '黄金糕'
@@ -191,6 +202,18 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+.example-area {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 15px;
+  font-size: 12px;
 
+  .example__info {
+    color: #666;
+    margin: 10px;
+    font-size: 14px;
+  }
+}
 </style>
