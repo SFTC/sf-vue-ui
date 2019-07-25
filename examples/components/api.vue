@@ -70,7 +70,7 @@
         style="width: 100%">
         <el-table-column
           prop="name"
-          label="name"
+          label="插槽名"
           width="180">
         </el-table-column>
         <el-table-column

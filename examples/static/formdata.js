@@ -1,49 +1,82 @@
 export const config = [
   {
     'name': 'FormTable Slot',
+    'type': 'Slot',
+    'introduce': '',
+    'tableData': [
+      {
+        'name': 'before-button',
+        'introduce': 'form选择之前的插槽'
+      }, {
+        'name': 'search-item',
+        'introduce': 'form选择之中的插槽'
+      }, {
+        'name': 'after-button',
+        'introduce': 'form选择之后的插槽'
+      }]
+  },
+  {
+    'name': 'FormTable Props',
     'type': 'API',
     'introduce': '',
     'tableData': [
       {
-        'attr': 'before-button',
-        'introduce': 'form选择之前的插槽',
-        'type': '元素'
-      }, {
-        'attr': 'placeholder',
-        'introduce': 'placeholder',
-        'type': 'String'
-      }, {
-        'attr': 'disabled',
-        'introduce': '控制全部选择器是否置灰',
-        'type': 'Boolean',
-        'default': 'false'
-      }]
+        'attr': 'queryFilter',
+        'introduce': 'Form展示的对象',
+        'type': 'Object'
+      },
+      {
+        'attr': 'domFilter',
+        'introduce': 'Form可选对象',
+        'type': 'Object'
+      },
+      {
+        'attr': 'queryFunc',
+        'introduce': 'Form后端的接口',
+        'type': 'Function'
+      },
+      {
+        'attr': 'tableLabel',
+        'introduce': 'Table表头',
+        'type': 'ArrayObject(minWidth,label,prop)'
+      },
+      {
+        'attr': 'tableData',
+        'introduce': 'Table内容',
+        'type': 'Array'
+      },
+      {
+        'attr': 'pageSize',
+        'introduce': '每页显示条目个数',
+        'type': 'Number'
+      },
+      {
+        'attr': 'total',
+        'introduce': '总条目数',
+        'type': 'Number'
+      },
+      {
+        'attr': 'tableOperation',
+        'introduce': 'Table内容操作',
+        'type': 'Object'
+      }
+    ]
   },
   {
-    'name': 'Select Events',
+    'name': 'FormTable Events',
     'type': 'Events',
     'introduce': '',
     'tableData': [
       {
-        'name': 'input',
-        'introduce': '传出输入框中的值组成的对象',
-        'arguments': '目前选中的值'
-      }]
-  },
-  {
-    'name': 'Option Props',
-    'type': 'API',
-    'introduce': '',
-    'tableData': [
-      {
-        'attr': 'value',
-        'introduce': '列表展示的值',
-        'type': 'String'
+        'name': 'setQueryFilter',
+        'introduce': '列表请求参数设置',
+        'arguments': 'domFilter所有name的集合'
       },
       {
-        'attr': 'label',
-        'introduce': '列表传给后端的值',
-        'type': 'String  Number'
-      }]
+        'name': 'callbackDataFormat',
+        'introduce': '接口回调处理',
+        'arguments': '后端返回的参数data'
+      }
+    ]
   }
 ]

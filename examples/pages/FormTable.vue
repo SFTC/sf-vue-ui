@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div class="example-area">
+      <div class="example__info">典型表单表格</div>
       <form-table
         ref="form-table"
         :queryFilter="queryFilter"
