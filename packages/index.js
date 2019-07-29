@@ -1,12 +1,10 @@
 import Demo from './demo'
-import Tree from './tree'
 import MultiSelect from './multi-select'
 import MultiOption from './multi-option'
 import FormTable from './form-table'
 // 组件列表
 const components = [
   Demo,
-  Tree,
   MultiSelect,
   MultiOption,
   FormTable
@@ -28,8 +26,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 // 导出的对象必须具有 install，才能被 Vue.use() 方法安装
 export default {
   install,
-  Demo,
-  Tree,
   MultiOption,
-  MultiSelect
+  MultiSelect,
+  FormTable
 }
