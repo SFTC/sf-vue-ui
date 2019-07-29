@@ -1,16 +1,19 @@
 {
-  "name": "tc-vue-ui",
-  "version": "0.1.4",
+  "name": "sf-vue-ui",
+  "version": "0.1.0",
   "private": false,
-  "module": "src/index.js",
+  "description":"基于elementui二次开发的组件",
+  "module": "lib/sf-vue-ui.common.js",
+  "repository":"SFTC/sf-vue-ui",
   "scripts": {
     "start": "vue-cli-service serve",
     "build": "node build/build.js",
     "lint": "vue-cli-service lint",
-    "build:multiselect": "vue-cli-service build --target lib --name multi-select --dest lib/multi-select packages/multi-select/src/main.vue",
-    "build:multioption": "vue-cli-service build --target lib --name multi-option --dest lib/multi-option packages/multi-option/src/main.vue",
-    "lib": "vue-cli-service build --target lib --name tc-vue-ui --dest lib packages/index.js"
+    "lib": "vue-cli-service build --target lib --name sf-vue-ui --dest lib packages/index.js"
   },
+  "keywords": ["vue", "component"],
+  "author": "0undefined0",
+  "license": "MIT",
   "dependencies": {
     "echarts": "^4.2.1",
     "element-ui": "^2.7.2",
