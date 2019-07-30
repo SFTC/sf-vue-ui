@@ -7,7 +7,7 @@
   "repository":"SFTC/sf-vue-ui",
   "scripts": {
     "start": "vue-cli-service serve",
-    "build": "node build/build.js",
+    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "lib": "vue-cli-service build --target lib --name sf-vue-ui --dest lib packages/index.js"
   },

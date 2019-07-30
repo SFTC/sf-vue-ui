@@ -4,6 +4,7 @@ examples/
 node_modules/
 public/
 src/
+dist/
 
 # 忽略指定文件
 .editorconfig
