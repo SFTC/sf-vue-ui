@@ -1,10 +1,8 @@
-import Demo from './demo'
 import MultiSelect from './multi-select'
 import MultiOption from './multi-option'
 import FormTable from './form-table'
 // 组件列表
 const components = [
-  Demo,
   MultiSelect,
   MultiOption,
   FormTable
