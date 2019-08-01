@@ -1,6 +1,6 @@
 {
   "name": "sf-vue-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "description":"基于elementui二次开发的组件",
   "module": "lib/sf-vue-ui.common.js",

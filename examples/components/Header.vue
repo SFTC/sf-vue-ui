@@ -24,8 +24,8 @@ export default {
     margin-bottom: 10px;
     box-shadow: 0 2px 8px #f0f1f2;
     .img-icon{
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
     }
     .img-txt{
       height: 50px;

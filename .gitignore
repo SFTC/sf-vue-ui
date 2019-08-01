@@ -2,6 +2,7 @@
 node_modules
 /dist
 lib
+/sf-vue-ui
 
 # local env files
 .env.local
