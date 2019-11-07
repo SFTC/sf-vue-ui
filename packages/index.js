@@ -1,11 +1,13 @@
 import MultiSelect from './multi-select'
 import MultiOption from './multi-option'
 import FormTable from './form-table'
+import FormDialog from './form-dialog'
 // 组件列表
 const components = [
   MultiSelect,
   MultiOption,
-  FormTable
+  FormTable,
+  FormDialog
 ]
 
 // 如果使用 use 注册插件，则所有的组件都将被注册
@@ -26,5 +28,6 @@ export default {
   install,
   MultiOption,
   MultiSelect,
+  FormDialog,
   FormTable
 }

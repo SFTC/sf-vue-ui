@@ -1,7 +1,7 @@
-import SfEcharts from './src/SfEcharts'
+import FormDialog from './src/main'
 /* istanbul ignore next */
-SfEcharts.install = function (Vue) {
-  Vue.component(SfEcharts.name, SfEcharts)
+FormDialog.install = function (Vue) {
+  Vue.component(FormDialog.name, FormDialog)
 }
 
-export default SfEcharts
+export default FormDialog

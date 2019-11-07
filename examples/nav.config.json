@@ -30,6 +30,10 @@
           {
             "path": "/multiselect",
             "title": "多选"
+          },
+          {
+            "path": "/formdialog",
+            "title": "表单"
           }
         ]
       }   

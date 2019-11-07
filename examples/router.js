@@ -4,6 +4,7 @@ import InstallAtion from './pages/InstallAtion'
 import QuickStart from './pages/QuickStart'
 import FormTable from './pages/FormTable'
 import MultiSelect from './pages/MultiSelect'
+import FormDialog from './pages/FormDialog'
 
 Vue.use(Router)
 
@@ -28,6 +29,10 @@ const router = new Router({
     {
       path: '/multiselect',
       component: MultiSelect
+    },
+    {
+      path: '/formdialog',
+      component: FormDialog
     }
   ]
 })
